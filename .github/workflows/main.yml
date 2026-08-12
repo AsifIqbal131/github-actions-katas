@@ -1,11 +1,23 @@
-name: Main workflow
-on: push
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
 jobs:
-  Build:
+  build:
     runs-on: ubuntu-latest
-    container: gradle:6-jdk11
+
     steps:
-      - name: Clone down repository
-        uses: actions/checkout@v4
-      - name: Build application
-        run: ci/build-app.sh
+      - uses: actions/checkout@v4
+
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
